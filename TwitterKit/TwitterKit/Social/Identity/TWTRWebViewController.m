@@ -76,9 +76,15 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     if (![self whitelistedDomain:request]) {
-        // Open in Safari if request is not whitelisted
-        NSLog(@"Opening link in Safari browser, as the host is not whitelisted: %@", request.URL);
-        [[UIApplication sharedApplication] openURL:request.URL];
+        if (nil != self.redirectHandler) {
+            self.redirectHandler(request.URL);
+        }
+        else {
+            // Open in Safari if request is not whitelisted
+            NSLog(@"Opening link in Safari browser, as the host is not whitelisted: %@", request.URL);
+            [[UIApplication sharedApplication] openURL:request.URL];
+        }
+        
         return NO;
     }
     if ([self shouldStartLoadWithRequest]) {

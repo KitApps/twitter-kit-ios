@@ -26,12 +26,14 @@
 typedef BOOL (^TWTRWebViewControllerShouldLoadCompletion)(UIViewController *controller, NSURLRequest *request, UIWebViewNavigationType navigationType);
 typedef void (^TWTRWebViewControllerCancelCompletion)(TWTRWebViewController *webViewController);
 typedef void (^TWTRWebViewControllerHandleError)(NSError *error);
+typedef void (^TWTRWebViewControllerHandleRedirectURL)(NSURL *redirectURL);
 
 @interface TWTRWebViewController : UIViewController
 
 @property (nonatomic, strong) NSURLRequest *request;
 @property (nonatomic, copy) TWTRWebViewControllerShouldLoadCompletion shouldStartLoadWithRequest;
 @property (nonatomic, copy) TWTRWebViewControllerHandleError errorHandler;
+@property (nonatomic, copy) TWTRWebViewControllerHandleRedirectURL redirectHandler;
 
 - (void)enableCancelButtonWithCancelCompletion:(TWTRWebViewControllerCancelCompletion)cancelCompletion;
 

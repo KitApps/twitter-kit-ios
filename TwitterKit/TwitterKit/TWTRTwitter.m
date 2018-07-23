@@ -342,6 +342,14 @@ static TWTRTwitter *sharedTwitter;
     }
 }
 
+- (void)webBasedLoginWithViewController:(UIViewController *)viewController completion:(TWTRLogInCompletion)completion
+{
+    TWTRParameterAssertOrReturn(completion);
+    [self assertTwitterKitInitialized];
+
+    [self performWebBasedLogin:viewController completion:completion];
+}
+
 #pragma mark - Internal Login
 
 - (void)performWebBasedLogin:(UIViewController *)viewController completion:(TWTRLogInCompletion)completion

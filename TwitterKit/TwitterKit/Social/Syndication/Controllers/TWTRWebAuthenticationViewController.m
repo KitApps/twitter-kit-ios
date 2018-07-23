@@ -97,8 +97,11 @@
 {
     TWTRWebViewController *webVC = [[TWTRWebViewController alloc] init];
     webVC.request = [NSURLRequest requestWithURL:self.authURL];
-
-    @weakify(self) webVC.errorHandler = ^(NSError *error) {
+    @weakify(self) webVC.redirectHandler = ^(NSURL *redirectURL) {
+        @strongify(self) [self handleAuthResponseWithURL:redirectURL];
+    };
+    
+    webVC.errorHandler = ^(NSError *error) {
         @strongify(self)[self failWithError:error];
     };
 
