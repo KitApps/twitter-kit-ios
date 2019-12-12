@@ -1,6 +1,6 @@
 {
   "name": "TwitterKit",
-  "version": "3.4.0",
+  "version": "3.4.2",
   "summary": "Increase user engagement and app growth.",
   "homepage": "https://github.com/twitter/twitter-kit-ios",
   "documentation_url": "https://github.com/twitter/twitter-kit-ios/wiki",
