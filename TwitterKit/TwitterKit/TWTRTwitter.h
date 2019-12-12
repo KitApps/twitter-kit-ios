@@ -105,6 +105,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)logInWithViewController:(nullable UIViewController *)viewController completion:(TWTRLogInCompletion)completion;
 
+/**
+ * Triggers user authentication using a web view. Does not check if Twitter is installed and can be used for authentication.
+ */
+- (void)webBasedLoginWithCompletion:(TWTRLogInCompletion)completion;
 - (void)webBasedLoginWithViewController:(nullable UIViewController *)viewController completion:(TWTRLogInCompletion)completion;
 
 /**

@@ -342,12 +342,23 @@ static TWTRTwitter *sharedTwitter;
     }
 }
 
+- (void)webBasedLoginWithCompletion:(TWTRLogInCompletion)completion
+{
+    [self webBasedLoginWithViewController:nil completion:completion];
+}
+
 - (void)webBasedLoginWithViewController:(UIViewController *)viewController completion:(TWTRLogInCompletion)completion
 {
     TWTRParameterAssertOrReturn(completion);
     [self assertTwitterKitInitialized];
 
-    [self performWebBasedLogin:viewController completion:completion];
+    TWTRLoginURLParser *loginURLParser = [[TWTRLoginURLParser alloc] initWithAuthConfig:self.sessionStore.authConfig];
+    if (![loginURLParser hasValidURLScheme]) {
+        // Throws exception if the app does not have a valid scheme
+        [NSException raise:TWTRInvalidInitializationException format:@"Attempt made to Log in or Like a Tweet without a valid Twitter Kit URL Scheme set up in the app settings. Please see https://dev.twitter.com/twitterkit/ios/installation for more info."];
+    } else {
+        [self performWebBasedLogin:viewController completion:completion];
+    }
 }
 
 #pragma mark - Internal Login
