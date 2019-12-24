@@ -357,6 +357,9 @@ static TWTRTwitter *sharedTwitter;
         // Throws exception if the app does not have a valid scheme
         [NSException raise:TWTRInvalidInitializationException format:@"Attempt made to Log in or Like a Tweet without a valid Twitter Kit URL Scheme set up in the app settings. Please see https://dev.twitter.com/twitterkit/ios/installation for more info."];
     } else {
+        self.mobileSSO = [[TWTRMobileSSO alloc] initWithAuthConfig:self.sessionStore.authConfig];
+        self.mobileSSO.completion = [completion copy];
+        
         [self performWebBasedLogin:viewController completion:completion];
     }
 }
